@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ACNH</string>
+    <string name="acnh_logo">acnh_logo</string>
+    <string name="personality">Personality</string>
+    <string name="species">Species</string>
+    <string name="birthday">Birthday:</string>
+    <string name="species1">Species:</string>
+    <string name="personality1">Personality:</string>
+    <string name="catchphrase">Catchphrase:</string>
+    <string name="villager_name">Villager Name</string>
+    <string name="animal_crossing_logo">animal crossing logo</string>
+    <string name="villager_image">villager image</string>
+</resources>

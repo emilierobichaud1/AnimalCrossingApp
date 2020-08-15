@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -39,6 +40,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TabHost tabHost=findViewById(R.id.tabhost);
+        tabHost.setup();
+
+        TabHost.TabSpec spec1=tabHost.newTabSpec("My Villagers");
+        spec1.setContent(R.id.tab1);
+        spec1.setIndicator("", getResources().getDrawable(R.drawable.villager_list));
+
+        TabHost.TabSpec spec2=tabHost.newTabSpec("Home");
+        spec2.setContent(R.id.tab2);
+        spec2.setIndicator("", getResources().getDrawable(R.drawable.house));
+
+        TabHost.TabSpec spec3=tabHost.newTabSpec("Dream Villagers");
+        spec3.setContent(R.id.tab3);
+        spec3.setIndicator("", getResources().getDrawable(R.drawable.star));
+
+        tabHost.addTab(spec1);
+        tabHost.addTab(spec2);
+        tabHost.addTab(spec3);
+
+        tabHost.setCurrentTab(1);
 
         personality = findViewById(R.id.personality);
         species = findViewById(R.id.species);

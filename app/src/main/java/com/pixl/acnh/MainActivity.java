@@ -44,14 +44,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         TabHost tabHost=findViewById(R.id.tabhost);
         tabHost.setup();
 
+        //tab 1
         TabHost.TabSpec spec1=tabHost.newTabSpec("My Villagers");
         spec1.setContent(R.id.tab1);
-        spec1.setIndicator("", getResources().getDrawable(R.drawable.villager_list));
+        spec1.setIndicator("", getResources().getDrawable(R.drawable.villager_list)) ;
 
+        //tab 2
         TabHost.TabSpec spec2=tabHost.newTabSpec("Home");
         spec2.setContent(R.id.tab2);
         spec2.setIndicator("", getResources().getDrawable(R.drawable.house));
 
+        //tab 3
         TabHost.TabSpec spec3=tabHost.newTabSpec("Dream Villagers");
         spec3.setContent(R.id.tab3);
         spec3.setIndicator("", getResources().getDrawable(R.drawable.star));

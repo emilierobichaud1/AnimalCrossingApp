@@ -11,4 +11,9 @@
     <string name="animal_crossing_logo">animal crossing logo</string>
     <string name="villager_image">villager image</string>
     <string name="home">HOME</string>
+    <string name="my_villagers">My Villagers</string>
+    <string name="dream_villagers">Dream Villagers</string>
+    <string name="a">A</string>
+    <string name="b">B</string>
+    <string name="c">C</string>
 </resources>

@@ -8,6 +8,8 @@ public class Villager {
     private String birthday;
     private String catchphrase;
     private String pic_link;
+    private Boolean my_villager;
+    private Boolean favourite;
 
     public Villager(String name, String personality, String species,
                     String birthday, String catchphrase, String pic_link) {
@@ -17,6 +19,22 @@ public class Villager {
         this.birthday = birthday;
         this.catchphrase = catchphrase;
         this.pic_link = pic_link;
+    }
+
+    public Boolean getMy_villager() {
+        return my_villager;
+    }
+
+    public Boolean getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        this.favourite = favourite;
+    }
+
+    public void setMy_villager(Boolean my_villager) {
+        this.my_villager = my_villager;
     }
 
     public void setName(String name) {

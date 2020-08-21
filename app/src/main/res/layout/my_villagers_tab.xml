@@ -20,7 +20,7 @@
             <TextView
                 android:id="@+id/my_villager"
                 android:layout_width="280dp"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/rounded_edittext"
@@ -33,120 +33,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TableLayout
-                android:layout_width="match_parent"
+            <GridLayout
+                android:id="@+id/grid"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/villager_one"
-                        android:layout_width="380px"
-                        android:layout_height="380px"
-                        android:layout_marginStart="41dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginEnd="41dp"
-                        android:visibility="gone"/>
-
-                    <ImageView
-                        android:id="@+id/villager_two"
-                        android:layout_width="380px"
-                        android:layout_height="380px"
-                        android:layout_marginTop="40dp"
-                        android:visibility="gone"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/villager_three"
-                        android:layout_width="380px"
-                        android:layout_height="380px"
-                        android:layout_marginStart="41dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginEnd="41dp"
-                        android:visibility="gone"/>
-
-                    <ImageView
-                        android:id="@+id/villager_four"
-                        android:layout_width="380px"
-                        android:layout_height="380px"
-                        android:layout_marginTop="40dp"
-                        android:visibility="gone"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <ImageView
-                        android:id="@+id/villager_five"
-                        android:layout_width="380px"
-                        android:layout_height="380px"
-                        android:layout_marginStart="41dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginEnd="41dp"
-                        android:visibility="gone"/>
-
-                    <ImageView
-                        android:id="@+id/villager_six"
-                        android:layout_width="380px"
-                        android:layout_height="380px"
-                        android:layout_marginTop="40dp"
-                        android:visibility="gone"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <ImageView
-                        android:id="@+id/villager_seven"
-                        android:layout_width="380px"
-                        android:layout_height="380px"
-                        android:layout_marginStart="41dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginEnd="41dp"
-                        android:visibility="gone"/>
-
-                    <ImageView
-                        android:id="@+id/villager_eight"
-                        android:layout_width="380px"
-                        android:layout_height="380px"
-                        android:layout_marginTop="40dp"
-                        android:visibility="gone"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <ImageView
-                        android:id="@+id/villager_nine"
-                        android:layout_width="380px"
-                        android:layout_height="380px"
-                        android:layout_marginStart="41dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginEnd="41dp"
-                        android:visibility="gone"/>
-
-                    <ImageView
-                        android:id="@+id/villager_ten"
-                        android:layout_width="380px"
-                        android:layout_height="380px"
-                        android:layout_marginTop="40dp"
-                        android:visibility="gone"/>
-
-                </TableRow>
-            </TableLayout>
+            </GridLayout>
         </LinearLayout>
     </ScrollView>
 

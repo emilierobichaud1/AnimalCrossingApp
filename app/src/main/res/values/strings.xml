@@ -16,4 +16,6 @@
     <string name="a">A</string>
     <string name="b">B</string>
     <string name="c">C</string>
+    <string name="add_to_favorites">Add to Favorites</string>
+    <string name="add_to_my_list">Add to My List</string>
 </resources>

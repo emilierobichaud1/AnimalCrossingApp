@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -17,6 +18,8 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
@@ -44,11 +47,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     GridLayout grid_view;
     GridLayout fave_grid;
     Map<String, Villager> villager_dict = new HashMap<>();
+    private static List<Villager> my_villagers = new ArrayList<>();
+    private static List<Villager> my_fave_villagers = new ArrayList<>();
+
+    SharedPreferences sharedpreferences;
+    public static final String MyPREFERENCES = "myprefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        //get the 'My Villagers' and 'Fave Villagers' that already exist in sharedpreferences
+        List<Villager> my_villager_list;
+        my_villager_list = new Gson().fromJson(sharedpreferences.getString("myVillagers", null),
+                new TypeToken<List<Villager>>() {
+        }.getType());
+        my_villagers.addAll(my_villager_list);
+        List<Villager> my_faves_list;
+        my_faves_list = new Gson().fromJson(sharedpreferences.getString("myFaves", null),
+                new TypeToken<List<Villager>>() {
+        }.getType());
+        my_fave_villagers.addAll(my_faves_list);
 
         TabHost tabHost = findViewById(R.id.tabhost);
         tabHost.setup();
@@ -117,6 +138,31 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         villager_name.setAdapter(adapter);
         villager_name.setOnItemClickListener(this);
 
+        setSavedPreferences();
+    }
+
+    @Override
+    public void onStop() {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        super.onStop();
+        if (my_villagers.size() > 0) {
+            editor.putString("myVillagers", new Gson().toJson(my_villagers)).apply();
+        }
+        if (my_fave_villagers.size() > 0) {
+            editor.putString("myFaves", new Gson().toJson(my_fave_villagers)).apply();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        super.onPause();
+        if (my_villagers.size() > 0) {
+            editor.putString("myVillagers", new Gson().toJson(my_villagers)).apply();
+        }
+        if (my_fave_villagers.size() > 0) {
+            editor.putString("myFaves", new Gson().toJson(my_fave_villagers)).apply();
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -158,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     grid_view.addView(villager);
                     my_list_button.setVisibility(View.INVISIBLE);
                     remove_list_button.setVisibility(View.VISIBLE);
+                    my_villagers.add(villager_dict.get(item));
                 } else {
                     Toast.makeText(getApplicationContext(), "Oops! You can only have 10 villagers. " +
                             "Remove from your list in order to add more!", Toast.LENGTH_SHORT).show();
@@ -171,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 my_list_button.setVisibility(View.VISIBLE);
                 remove_list_button.setVisibility(View.INVISIBLE);
                 grid_view.removeView(grid_view.findViewById(item.hashCode()));
+                my_villagers.remove(villager_dict.get(item));
             }
         });
 
@@ -184,6 +232,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 fave_grid.addView(dream_villager);
                 my_favorites_button.setVisibility(View.INVISIBLE);
                 remove_favorites_button.setVisibility(View.VISIBLE);
+                my_fave_villagers.add(villager_dict.get(item));
             }
         });
 
@@ -193,6 +242,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 my_favorites_button.setVisibility(View.VISIBLE);
                 remove_favorites_button.setVisibility(View.INVISIBLE);
                 fave_grid.removeView(fave_grid.findViewById(item.hashCode()));
+                my_fave_villagers.remove(villager_dict.get(item));
             }
         });
     }
@@ -218,5 +268,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             villager_dict.put(all_villagers.get(i).getName(), all_villagers.get(i));
         }
         return villager_dict;
+    }
+
+    public void setSavedPreferences() {
+        if (sharedpreferences.contains("myVillagers")) {
+            List<Villager> my_villager_list;
+            my_villager_list = new Gson().fromJson(sharedpreferences.getString("myVillagers", null), new TypeToken<List<Villager>>() {
+            }.getType());
+            for (int i = 0; i < my_villager_list.size(); i++) {
+                ImageView villager = new ImageView(getApplicationContext());
+                villager.setPadding(25, 25, 25, 25);
+                villager.setId(my_villager_list.get(i).getName().hashCode());
+                Picasso.get().load(my_villager_list.get(i).getPic_link()).resize(380, 380).into(villager);
+                grid_view.addView(villager);
+            }
+        }
+        if (sharedpreferences.contains("myFaves")) {
+            List<Villager> my_faves_list;
+            my_faves_list = new Gson().fromJson(sharedpreferences.getString("myFaves", null), new TypeToken<List<Villager>>() {
+            }.getType());
+            for (int i = 0; i < my_faves_list.size(); i++) {
+                ImageView villager = new ImageView(getApplicationContext());
+                villager.setPadding(25, 25, 25, 25);
+                villager.setId(my_faves_list.get(i).getName().hashCode());
+                Picasso.get().load(my_faves_list.get(i).getPic_link()).resize(380, 380).into(villager);
+                fave_grid.addView(villager);
+            }
+        }
     }
 }

@@ -64,12 +64,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         my_villager_list = new Gson().fromJson(sharedpreferences.getString("myVillagers", null),
                 new TypeToken<List<Villager>>() {
         }.getType());
-        my_villagers.addAll(my_villager_list);
+        if(my_villagers.size()>0) {
+            my_villagers.addAll(my_villager_list);
+        }
         List<Villager> my_faves_list;
         my_faves_list = new Gson().fromJson(sharedpreferences.getString("myFaves", null),
                 new TypeToken<List<Villager>>() {
         }.getType());
-        my_fave_villagers.addAll(my_faves_list);
+        if(my_fave_villagers.size()>0) {
+            my_villagers.addAll(my_villager_list);
+        }
 
         TabHost tabHost = findViewById(R.id.tabhost);
         tabHost.setup();
